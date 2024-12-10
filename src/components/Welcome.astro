@@ -1,12 +1,42 @@
 ---
-import astroLogo from '../assets/astro.svg';
-import background from '../assets/background.svg';
-import Layout from '../layouts/Layout.astro';
+import astroLogo from "../assets/astro.svg";
+import background from "../assets/background.svg";
+import Layout from "../layouts/Layout.astro";
 ---
 
-
 <Layout>
-	<main>
-		<h1 class="text-6xl font-bold text-center mt-6">LSC</h1>
-	</main>
+  <main>
+    <div
+      class="min-h-screen bg-gradient-to-br from-[#D6ECD7] via-emerald-100 to-emerald-400 "
+    >
+      {/* Hero Section */}
+      <main
+        class="flex flex-col items-center justify-center text-center px-4 pt-20 pb-40"
+      >
+        {/* Logo */}
+		<div class="p-6 rounded-full mt-10">
+			<img src="/src/assets/hands.png" style="opacity: 0.75;" class="w-72 h-72 object-cover rounded-full mr-10" />
+
+		  </div>
+
+        {/* Title */}
+        <h1 class="text-7xl  font-bold  font- text-customGray mb-2">SigNa</h1>
+
+        {/* Subtitle */}
+        <p class="text-xl text-customGray  mb-8">
+          Our AI model about Colombians signs
+        </p>
+
+        {/* CTA Button */}
+        <button
+          class="px-6 py-2 border-2  border-customGray bg-gray-200 bg-opacity-50 text-customGray rounded-xl hover:bg-gray-200 transition-colors"
+        >
+          See more
+        </button>
+
+        {/* Scroll Indicator */}
+        <div class="absolute bottom-8 animate-bounce"></div>
+      </main>
+    </div>
+  </main>
 </Layout>
