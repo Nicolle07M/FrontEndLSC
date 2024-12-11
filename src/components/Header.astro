@@ -1,23 +1,63 @@
 ---
-console.log('javascript')
+console.log('Header Component Loaded');
 ---
-<header class="fixed w-[1787px] rounded-xl bg-[#000000] opacity-45 shadow-md mt-5 ml-10">
-    <nav class="p-4">
-      <div class="max-w-7xl mx-auto flex items-center justify-between">
-        <!-- Aseguramos que "SigNa" esté alineado a la izquierda -->
-        <span class="text-white text-3xl font-semibold">SigNa</span>
 
-        <div class="flex items-center gap-4">
-          <a href="#" class="text-white hover:text-gray-400 mr-60">Models</a>
-          <a href="#" class="text-white hover:text-gray-400 mr-60">Doc</a>
-          <button class="font-bold px-7 py-1 bg-emerald-600 text-white rounded-xl hover:bg-[#6AD0B2] transition-colors">
-            Log in
-          </button>
-          <button class="font-bold px-7 py-1 border-2 rounded-xl text-white hover:text-emerald-700">
-            Sign in
-          </button>
-        </div>
+<script>
+  let lastScrollY = 0;
+
+  if (typeof window !== "undefined") {
+    const handleScroll = () => {
+      const header = document.querySelector('header');
+      if (!header) return;
+
+      if (window.scrollY > lastScrollY) {
+        // Scroll hacia abajo: ocultar header
+        header.classList.add('-translate-y-[300px]');
+        header.classList.remove('shadow-[0_0_10px_2px_rgba(255,255,255,0.7)]', 'border', 'border-white');
+      } else {
+        // Scroll hacia arriba: mostrar header con borde blanco e iluminación
+        header.classList.remove('-translate-y-[300px]');
+        header.classList.add('shadow-[0_0_10px_2px_rgba(255,255,255,0.7)]', 'border', 'border-white');
+
+        // Agregar brillo por 30 segundos
+        header.classList.add('glow');
+        setTimeout(() => {
+          header.classList.remove('glow');
+        }, 30000); // 30 segundos
+      }
+
+      lastScrollY = window.scrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+  }
+</script>
+
+<header class="fixed w-[1787px] rounded-xl bg-[#000000] bg-opacity-45 shadow-md mt-5 ml-10 transition-transform duration-300 ease-in-out z-50">
+  <nav class="p-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <!-- Logo -->
+      <span class="text-white text-3xl font-semibold">SigNa</span>
+
+      <!-- Menú -->
+      <div class="flex items-center gap-4">
+        <a href="#" class="text-white hover:text-gray-400 mr-60">Models</a>
+        <a href="#" class="text-white hover:text-gray-400 mr-60">Doc</a>
+        <button class="font-bold px-7 py-1 bg-emerald-600 text-white rounded-xl hover:bg-[#6AD0B2] transition-colors">
+          Log in
+        </button>
+        <button class="font-bold px-7 py-1 border-2 rounded-xl text-white hover:text-emerald-700">
+          Sign in
+        </button>
       </div>
-    </nav>
+    </div>
+  </nav>
 </header>
 
+<!-- Asegúrate de definir la clase "glow" en tu CSS -->
+<style>
+  .glow {
+    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.6);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+</style>

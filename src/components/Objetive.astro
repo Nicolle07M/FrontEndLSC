@@ -5,9 +5,9 @@
 
 <main>
 
-    <div class="min-h-screen bg-black p-6 relative">
+    <div class="min-h-screen bg-black p-6  relative border-">
         {/* Imagen decorativa superior derecha */}
-        <div class=" absolute top-0 right-0 w-200 h-200 opacity-60 scale-y-[-1]">
+        <div class=" absolute top-0 right-0 w-200 h-200 opacity-60 scale-y-[-1]  ">
           <img
             src="/src/assets/ai_mano.png"
             alt=""
@@ -54,7 +54,7 @@
         </div>
       
         {/* Imagen decorativa inferior izquierda */}
-        <div class="absolute bottom-0 left-0 w-200 h-200 opacity-60 scale-x-[-1]">
+        <div class="absolute bottom-0 left-0 w-200 h-200 opacity-60 scale-x-[-1] hidden-on-load">
           <img
             src="/src/assets/ai_mano.png"
             alt=""
@@ -66,4 +66,22 @@
 
 
 </main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fadeIn');
+          }
+        });
+      },
+      { threshold: 0.1 } // Se activa cuando el 10% del elemento es visible
+    );
+
+    const hiddenElements = document.querySelectorAll('.hidden-on-load');
+    hiddenElements.forEach((el) => observer.observe(el));
+  });
+</script>
 
