@@ -2,14 +2,16 @@
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import Objetive from '../components/Objetive.astro';
+import ObjetiveSection from '../components/ObjectiveSection.jsx';
 import Charact from '../components/Charact.astro'
+import AIToolsShowcase from '../components/AIToolsShowcase.jsx'
 ---
 
 <Layout>
 	<Header/>		
 		<Welcome/>
-		<Objetive/>
+		<ObjetiveSection client:load/>
 		<Charact/>
+		<AIToolsShowcase client:load/>
 
 </Layout>

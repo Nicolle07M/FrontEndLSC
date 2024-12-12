@@ -13,17 +13,13 @@ console.log('Header Component Loaded');
       if (window.scrollY > lastScrollY) {
         // Scroll hacia abajo: ocultar header
         header.classList.add('-translate-y-[300px]');
-        header.classList.remove('shadow-[0_0_10px_2px_rgba(255,255,255,0.7)]', 'border', 'border-white');
+        header.classList.remove( 'border', 'border-white');
       } else {
         // Scroll hacia arriba: mostrar header con borde blanco e iluminación
         header.classList.remove('-translate-y-[300px]');
-        header.classList.add('shadow-[0_0_10px_2px_rgba(255,255,255,0.7)]', 'border', 'border-white');
+        header.classList.add( 'border', 'border-white');
 
-        // Agregar brillo por 30 segundos
-        header.classList.add('glow');
-        setTimeout(() => {
-          header.classList.remove('glow');
-        }, 30000); // 30 segundos
+        
       }
 
       lastScrollY = window.scrollY;
@@ -37,7 +33,7 @@ console.log('Header Component Loaded');
   <nav class="p-4">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <!-- Logo -->
-      <span class="text-white text-3xl font-semibold">SigNa</span>
+      <span class="text-white text-3xl font-semibold">Sol</span>
 
       <!-- Menú -->
       <div class="flex items-center gap-4">
