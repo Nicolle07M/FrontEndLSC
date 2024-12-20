@@ -1,18 +1,18 @@
 ---
 import NavHeader from '../components/Header.astro';
 import Toolbar from '../components/toolbar.astro';
+import Layout from '../layouts/Layout.astro';
 ---
+<Layout>
+  <NavHeader />
 
-<div class="min-h-screen bg-gray-100">
-  <div class="max-w-screen-xl mx-auto p-4">
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-      <!-- Importa el componente NavHeader -->
-      <NavHeader />
-      
+<div class="bg-gray-200">
+   <div class="max-w-screen-xl mx-auto p-4  ">
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden mt-24">
+      <!-- Importa el componente NavHeader -->   
       <main class="min-h-[500px] p-4 bg-white border border-gray-100 mx-4 my-8 rounded-lg">
         <!-- Área de contenido -->
       </main>
-      
       <div class="p-4 flex justify-center">
         <!-- Importa el componente Toolbar -->
         <Toolbar />
@@ -20,3 +20,8 @@ import Toolbar from '../components/toolbar.astro';
     </div>
   </div>
 </div>
+ 
+ 
+
+</Layout>
+

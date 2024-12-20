@@ -1,14 +1,15 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { Icon } from 'astro-icon';
+import Icon from 'astro-icon';
 
 interface Props extends HTMLAttributes<'button'> {
-  icon: string;
-  label: string;
-  isActive?: boolean;
+  icon: string; // Nombre del ícono a mostrar
+  label: string; // Etiqueta del botón
+  isActive?: boolean; // Estado del botón
 }
 
-const { icon, label, isActive = false, ...props } = Astro.props;
+// Extraer las propiedades de Astro.props
+const { icon, label, isActive = false , ...props } = Astro.props;
 ---
 
 <div class="flex flex-col items-center gap-1">
@@ -19,14 +20,9 @@ const { icon, label, isActive = false, ...props } = Astro.props;
     ]}
     {...props}
   >
-    <Icon 
-      name={icon} 
-      class:list={[
-        "h-6 w-6",
-        isActive ? "text-emerald-700" : "text-gray-600"
-      ]} 
-    />
+    
+   
+    
   </button>
   <span class="text-xs text-gray-600">{label}</span>
 </div>
-
