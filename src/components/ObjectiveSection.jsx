@@ -37,7 +37,7 @@ export default function ObjectiveSection() {
   }
 
   return (
-    <div ref={ref} className="min-h-screen w-full from-black via-gray-900 bg-black relative overflow-hidden">
+    <div ref={ref} className="min-h-screen w-full from-black via-gray-900 bg-black relative overflow-hidden flex flex-col justify-center items-center">
       {/* Gradient Orbs - unchanged */}
       <div className="absolute top-0 -left-4 w-72 h-72 bg-emerald-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
       <div className="absolute top-0 -right-4 w-72 h-72 bg-emerald-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
@@ -116,4 +116,3 @@ export default function ObjectiveSection() {
     </div>
   )
 }
-

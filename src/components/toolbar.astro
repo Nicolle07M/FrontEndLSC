@@ -1,0 +1,36 @@
+---
+import ToolButton from './tool_button.astro';
+---
+
+<div class="bg-white p-4 rounded-lg shadow-lg flex justify-center gap-8" id="toolbar">
+  <ToolButton icon="mdi:alphabetical" label="ABC" />
+  <ToolButton icon="mdi:horse-variant" label="Animales" isActive={true} />
+  <ToolButton icon="mdi:fruit-apple" label="Frutas" />
+  <ToolButton icon="mdi:hand-wave" label="Saludo" />
+</div>
+
+<script>
+  const toolbar = document.querySelector('#toolbar');
+  
+  if (toolbar) {
+    toolbar.addEventListener('click', (e) => {
+      const button = (e.target as HTMLElement).closest('button');
+      if (!button) return;
+      
+      // Remove active state from all buttons
+      toolbar.querySelectorAll('button').forEach(btn => {
+        btn.classList.remove('bg-emerald-200', 'border-emerald-300');
+        btn.classList.add('border-gray-200');
+        btn.querySelector('svg')?.classList.remove('text-emerald-700');
+        btn.querySelector('svg')?.classList.add('text-gray-600');
+      });
+      
+      // Add active state to clicked button
+      button.classList.add('bg-emerald-200', 'border-emerald-300');
+      button.classList.remove('border-gray-200');
+      button.querySelector('svg')?.classList.add('text-emerald-700');
+      button.querySelector('svg')?.classList.remove('text-gray-600');
+    });
+  }
+</script>
+

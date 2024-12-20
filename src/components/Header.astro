@@ -1,59 +1,88 @@
 ---
-console.log('Header Component Loaded');
+
 ---
 
-<script>
-  let lastScrollY = 0;
 
-  if (typeof window !== "undefined") {
-    const handleScroll = () => {
-      const header = document.querySelector('header');
-      if (!header) return;
-
-      if (window.scrollY > lastScrollY) {
-        // Scroll hacia abajo: ocultar header
-        header.classList.add('-translate-y-[300px]');
-        header.classList.remove( 'border', 'border-white');
-      } else {
-        // Scroll hacia arriba: mostrar header con borde blanco e iluminación
-        header.classList.remove('-translate-y-[300px]');
-        header.classList.add( 'border', 'border-white');
-
-        
-      }
-
-      lastScrollY = window.scrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll);
-  }
-</script>
-
-<header class="fixed w-[1787px] rounded-xl bg-[#000000] bg-opacity-45 shadow-md mt-5 ml-10 transition-transform duration-300 ease-in-out z-50">
-  <nav class="p-4">
+<header class="fixed w-full bg-[#000000] bg-opacity-45 shadow-md mt-5 rounded-xl transition-transform duration-300 ease-in-out z-50 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-4 ">
+  <nav>
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <!-- Logo -->
       <span class="text-white text-3xl font-semibold">Sol</span>
 
-      <!-- Menú -->
+      <!-- Menú hamburguesa (visible solo en móvil) -->
+      <button 
+        id="menuButton"
+        class="md:hidden text-white p-2"
+        aria-label="Menu"
+      >
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          class="h-6 w-6" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            stroke-width="2" 
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+
+      <!-- Enlaces de navegación (visibles en desktop) -->
+      <div class="hidden md:flex items-center gap-16 lg:gap-40">
+        <a href="#" class="text-white hover:text-gray-400">Modelos</a>
+        <a href="#" class="text-white hover:text-gray-400">Doc</a>
+      </div>
+
+      <!-- Botones (siempre visibles) -->
       <div class="flex items-center gap-4">
-        <a href="#" class="text-white hover:text-gray-400 mr-60">Models</a>
-        <a href="#" class="text-white hover:text-gray-400 mr-60">Doc</a>
-        <button class="font-bold px-7 py-1 bg-emerald-600 text-white rounded-xl hover:bg-[#6AD0B2] transition-colors">
-          Log in
-        </button>
+        <a 
+          href="/models" 
+          class="font-bold px-7 py-1 bg-emerald-600 text-white rounded-xl hover:bg-[#6AD0B2] transition-colors"
+        >
+          registrate
+        </a>
         <button class="font-bold px-7 py-1 border-2 rounded-xl text-white hover:text-emerald-700">
-          Sign in
+          Inicia Sesion
         </button>
+      </div>
+    </div>
+
+    <!-- Menú móvil -->
+    <div 
+      id="mobileMenu" 
+      class="hidden md:hidden absolute top-full left-0 w-full bg-black bg-opacity-90 rounded-b-xl transform transition-transform duration-300 ease-in-out"
+    >
+      <div class="flex flex-col items-center py-4 space-y-4">
+        <a href="#" class="text-white hover:text-gray-400">Models</a>
+        <a href="#" class="text-white hover:text-gray-400">Doc</a>
       </div>
     </div>
   </nav>
 </header>
 
-<!-- Asegúrate de definir la clase "glow" en tu CSS -->
-<style>
-  .glow {
-    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.6);
-    transition: box-shadow 0.3s ease-in-out;
+<script>
+  // JavaScript para controlar el menú móvil
+  const menuButton = document.getElementById('menuButton');
+  const mobileMenu = document.getElementById('mobileMenu');
+  let isMenuOpen = false;
+
+  if (menuButton && mobileMenu) {
+    menuButton.addEventListener('click', () => {
+      isMenuOpen = !isMenuOpen;
+      mobileMenu.classList.toggle('hidden');
+      
+      // Opcional: Añadir animación
+      if (isMenuOpen) {
+        mobileMenu.classList.add('translate-y-0');
+        mobileMenu.classList.remove('-translate-y-full');
+      } else {
+        mobileMenu.classList.add('-translate-y-full');
+        mobileMenu.classList.remove('translate-y-0');
+      }
+    });
   }
-</style>
+</script>

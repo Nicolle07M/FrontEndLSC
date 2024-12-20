@@ -1,103 +1,137 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { BrainCog, Box, Terminal, PiIcon as PythonLogo } from 'lucide-react';
+import { useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const tools = [
-  { name: 'TensorFlow', icon: BrainCog, color: '#FF6F00', description: 'Open-source library for machine learning and artificial intelligence' },
-  { name: 'YOLO', icon: Box, color: '#00FFFF', description: 'Real-time object detection system' },
-  { name: 'Conda', icon: Terminal, color: '#43B02A', description: 'Package management system and environment management system' },
-  { name: 'Python', icon: PythonLogo, color: '#3776AB', description: 'High-level programming language for general-purpose programming' },
+const technologies = [
+  {
+    name: 'TensorFlow',
+    description: 'An open-source platform for machine learning and AI.',
+  },
+  {
+    name: 'YOLO',
+    description: 'A real-time object detection system.',
+  },
+  {
+    name: 'Python',
+    description: 'A versatile programming language for various applications.',
+  },
+  {
+    name: 'Anaconda',
+    description: 'A distribution for scientific computing and data science.',
+  },
+  {
+    name: 'Jupyter',
+    description: 'An interactive web-based notebook for computational workflows.',
+  },
 ];
 
-export default function AIToolsShowcase() {
-  const [hoveredTool, setHoveredTool] = useState(null);
+function Button({ variant, size, className, onClick, children }) {
+  const buttonClass = `${className} ${variant === 'ghost' ? 'bg-transparent border' : ''} ${size === 'icon' ? 'p-2' : ''}`;
+  return (
+    <button className={buttonClass} onClick={onClick}>
+      {children}
+    </button>
+  );
+}
+
+export default function TechCarousel() {
+  const [current, setCurrent] = useState(2);
+
+  const next = () => setCurrent((c) => (c + 1) % technologies.length);
+  const prev = () => setCurrent((c) => (c - 1 + technologies.length) % technologies.length);
 
   return (
-    <div className="min-h-screen bg-black text-white py-20 px-4 sm:px-6 lg:px-8">
-      <motion.h2
-        className="text-4xl md:text-6xl font-bold text-center mb-16"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        Powerful AI Tools at Work
-      </motion.h2>
-
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+    <div className="min-h-screen bg-black flex items-center justify-center overflow-hidden">
+      <div className="relative w-full">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-black/50 text-blue-400 hover:text-blue-300"
+          onClick={prev}
         >
-          {tools.map((tool, index) => (
-            <motion.div
-              key={tool.name}
-              className="relative bg-gray-800 rounded-lg p-6 overflow-hidden"
-              whileHover={{ scale: 1.05 }}
-              onHoverStart={() => setHoveredTool(tool.name)}
-              onHoverEnd={() => setHoveredTool(null)}
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br"
-                style={{ background: `linear-gradient(135deg, ${tool.color}22, ${tool.color}00)` }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: hoveredTool === tool.name ? 1 : 0 }}
-                transition={{ duration: 0.3 }}
-              />
-              <div className="relative z-10">
-                <tool.icon size={48} color={tool.color} className="mb-4" />
-                <h3 className="text-2xl font-semibold mb-2">{tool.name}</h3>
-                <p className="text-gray-400">{tool.description}</p>
-              </div>
-              <motion.div
-                className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-transparent via-white to-transparent"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: hoveredTool === tool.name ? 1 : 0 }}
-                transition={{ duration: 0.5 }}
-              />
-            </motion.div>
+          <ChevronLeft className="h-8 w-8" />
+        </Button>
+
+        {/* Título agregado */}
+        <h2 className="text-white text-5xl md:text-6xl font-bold text-center mb-16">
+          Herramientas usadas
+        </h2>
+
+        <div className="w-full py-32 mt-56 ">
+          <div 
+            className="flex items-center justify-center"
+            style={{ perspective: '1500px' }}
+          >
+            {technologies.map((tech, index) => {
+              const distance = ((index - current + technologies.length) % technologies.length);
+              const normalizedDistance = distance > technologies.length / 2 
+                ? distance - technologies.length 
+                : distance;
+              const isCenter = distance === 0;
+              const absDistance = Math.abs(normalizedDistance);
+              
+              return (
+                <div
+                  key={tech.name}
+                  className="absolute w-[300px] md:w-[400px] aspect-[3/4] transition-all duration-500"
+                  style={{
+                    transform: `
+                      translateX(${normalizedDistance * 60}%) 
+                      translateZ(${-Math.abs(normalizedDistance) * 100}px)
+                      rotateY(${normalizedDistance * 25}deg)
+                      scale(${1 - absDistance * 0.15})
+                    `,
+                    zIndex: technologies.length - absDistance,
+                    opacity: 1 - absDistance * 0.3,
+                  }}
+                >
+                  <div 
+                    className={`
+                      w-full h-[350px] rounded-xl transition-all duration-500
+                      ${isCenter ? 'bg-black shadow-[0_0_50px_10px_rgba(59,130,246,0.5)]' : 'bg-gray-900'}
+                      border-2 border-blue-500/30
+                    `}
+                  >
+                    <div className={`
+                      absolute inset-[2px] rounded-xl
+                      ${isCenter ? 'bg-gradient-to-br from-blue-500/20 to-transparent' : 'bg-black/50'}
+                      backdrop-blur-sm
+                      h-full
+                    `}>
+                      <div className="p-6">
+                        <h3 className="text-2xl font-bold text-white mb-4">{tech.name}</h3>
+                        <p className="text-lg text-blue-400 font-semibold">{tech.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 h-12 w-12 rounded-full bg-black/50 text-blue-400 hover:text-blue-300"
+          onClick={next}
+        >
+          <ChevronRight className="h-8 w-8" />
+        </Button>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex justify-center gap-3">
+          {technologies.map((_, i) => (
+            <button
+              key={i}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                i === current 
+                  ? 'bg-blue-400 shadow-[0_0_15px_3px_rgba(59,130,246,0.5)]' 
+                  : 'bg-gray-600 hover:bg-gray-500'
+              }`}
+              onClick={() => setCurrent(i)}
+            />
           ))}
-        </motion.div>
+        </div>
       </div>
-
-      <motion.div
-        className="mt-20 text-center"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-      >
-        
-      </motion.div>
-
-      <motion.div
-        className="absolute top-0 left-0 w-full h-full pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.1 }}
-        transition={{ duration: 1, delay: 0.6 }}
-      >
-        {[...Array(50)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute bg-white rounded-full"
-            style={{
-              width: Math.random() * 4 + 1 + 'px',
-              height: Math.random() * 4 + 1 + 'px',
-              top: Math.random() * 100 + '%',
-              left: Math.random() * 100 + '%',
-              animation: `float ${Math.random() * 10 + 5}s infinite linear`,
-            }}
-          />
-        ))}
-      </motion.div>
-
-      <style jsx>{`
-        @keyframes float {
-          0% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-          100% { transform: translateY(0px); }
-        }
-      `}</style>
     </div>
   );
 }

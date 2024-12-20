@@ -5,13 +5,15 @@ import Header from '../components/Header.astro';
 import ObjetiveSection from '../components/ObjectiveSection.jsx';
 import Charact from '../components/Charact.astro'
 import AIToolsShowcase from '../components/AIToolsShowcase.jsx'
+import Footer from '../components/Footer.astro';
+
 ---
 
 <Layout>
 	<Header/>		
-		<Welcome/>
-		<ObjetiveSection client:load/>
-		<Charact/>
-		<AIToolsShowcase client:load/>
-
+	<Welcome/>
+	<ObjetiveSection client:load/>
+	<Charact/>
+	<AIToolsShowcase client:load/>
+	<Footer/>
 </Layout>
