@@ -1,3 +1,10 @@
+// * Comentario destacado
+// ! Advertencia o error
+// ? Pregunta o duda
+// TODO: Tarea pendiente
+// Normal: Comentario genérico
+
+
 'use client'
 
 import { motion, useAnimation } from "framer-motion"

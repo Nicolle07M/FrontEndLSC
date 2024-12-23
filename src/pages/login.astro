@@ -1,47 +1,56 @@
-<div class="flex min-h-screen">
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+<body>
+  <div class="flex min-h-screen">
     <!-- Left Section - Login Form -->
     <div>
       <!-- Logo y Texto juntos -->
       <div class="absolute flex items-center top-5 left-5">
-        <img src="/src/assets/hands.png"
-             alt="Logo"
-             class="opacity-75 object-cover w-20 h-20 rounded-full mr-2" />
-        <span class="text-xl font-medium">Sol</span>
+        <img src="/src/assets/hands.png" alt="Logo" class="opacity-75 object-cover w-20 h-20 rounded-full mr-2" />
+        <a  href="/" class="text-xl font-medium">Sol</a>
       </div>
     </div>
-   
-    <div class="w-full lg:w-[40%] p-8 md:p-12 flex flex-col justify-center  bg-[#F0F0F0]">
+
+    <div class="w-full lg:w-[40%] p-8 md:p-12 flex flex-col justify-center bg-[#F0F0F0]">
       <div class="max-w-sm mx-auto w-full">
         <!-- Login Form -->
         <div class="space-y-6">
           <div>
-            <h1 class="text-2xl font-semibold mb-1">Welcome back to Sol</h1>
-            <p class="text-gray-500">Enter your details</p>
+            <h1 class="text-2xl font-semibold mb-1">Bienvenido de nuevo a Sol</h1>
+            <p class="text-gray-500">Ingresa la información</p>
           </div>
           <div class="space-y-4">
             <div>
-              <input type="email" placeholder="Email" class="w-full bg-[#F0F0F0] p-3 border-b-2" id="email" />
+              <input type="email" placeholder="Email" class="w-full bg-[#F0F0F0] p-3 border-b-2 border-black-100" id="email" />
             </div>
             <div>
-              <input type="password" placeholder="Password" class="w-full bg-gray-50 p-3 border-b-2" id="password" />
+              <input type="password" placeholder="Password" class="w-full bg-[#F0F0F0] p-3 border-b-2" id="password" />
               <a href="/forgot-password" class="text-sm text-gray-500 hover:text-gray-700 mt-2 inline-block border-b-2-black">
-                Forgot password
+                Olvidaste tu Contraseña
               </a>
             </div>
             <button onclick="handleLogin()" class="w-full bg-emerald-400 hover:bg-emerald-500 text-white py-2 rounded-md transition-colors">
-              Log in
+              <a href="/models">Ingresa</a>
             </button>
             <p class="text-center text-sm text-gray-500">
-              Don’t have an account?
+              ¿No tienes una cuenta?
               <a href="/signup" class="text-black hover:underline underline-offset-4">
-                Sign up for free
+                Regístrate Gratis
               </a>
             </p>
           </div>
         </div>
       </div>
     </div>
-   
+
     <!-- Right Section - Image -->
     <div class="hidden lg:block lg:w-[60%] bg-[#F0F0F0] relative">
       <!-- Placeholder Content -->
@@ -50,14 +59,9 @@
         <img
           src="/src/assets/login.jpg"
           alt="Imagen de fondo"
-          class="relative w-[60%] h-[100%] object-cover -rotate-90 rounded-bl-3  xl rounded-tr-3xl " />
-      </div>
-      <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2">
-        <h2 class="text-4xl font-semibold">Sol</h2>
+          class="relative w-[60%] h-[100%] object-cover -rotate-90 rounded-tr-[100px] rounded-bl-[100px]" />
       </div>
     </div>
-   
   </div>
-  
-  
-  
+</body>
+</html>

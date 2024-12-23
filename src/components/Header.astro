@@ -1,13 +1,12 @@
 ---
-
+const { showAuthButtons = true } = Astro.props; // Prop por defecto: muestra los botones
 ---
-
 
 <header class="fixed w-full bg-[#000000] bg-opacity-45 shadow-md mt-5 rounded-xl transition-transform duration-300 ease-in-out z-50 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-4 ">
   <nav>
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <!-- Logo -->
-      <span class="text-white text-3xl font-semibold">Sol</span>
+      <a href="/" class="text-white text-3xl font-semibold">Sol</a>
 
       <!-- Menú hamburguesa (visible solo en móvil) -->
       <button 
@@ -32,23 +31,28 @@
       </button>
 
       <!-- Enlaces de navegación (visibles en desktop) -->
-      <div class="hidden md:flex items-center gap-16 lg:gap-40">
+      <div class="hidden md:flex items-center justify-between gap-16 lg:gap-40 mx-auto">
         <a href="#" class="text-white hover:text-gray-400">Modelos</a>
         <a href="#" class="text-white hover:text-gray-400">Doc</a>
       </div>
 
       <!-- Botones (siempre visibles) -->
-      <div class="flex items-center gap-4">
-        <a 
-          href="/login" 
-          class="font-bold px-7 py-1 bg-emerald-600 text-white rounded-xl hover:bg-[#6AD0B2] transition-colors"
-        >
-          registrate
-        </a>
-        <button class="font-bold px-7 py-1 border-2 rounded-xl text-white hover:text-emerald-700">
-          Inicia Sesion
-        </button>
-      </div>
+      {showAuthButtons && (
+        <div class="flex items-center gap-4">
+          <a 
+            href="/SigUp" 
+            class="font-bold px-7 py-1 bg-emerald-600 text-white rounded-xl hover:bg-[#6AD0B2] transition-colors"
+          >
+            registrate
+          </a>
+          <a 
+            href="/login" 
+            class="font-bold px-7 py-1 border-2 rounded-xl text-white hover:text-emerald-700"
+          >
+            Inicia sesion
+          </a>
+        </div>
+      )}
     </div>
 
     <!-- Menú móvil -->
