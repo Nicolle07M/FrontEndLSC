@@ -1,30 +1,37 @@
-
+---
+const videoUrl = "https://samplelib.com/lib/preview/mp4/sample-5s.mp4";
+---
 
 <section class="bg-black min-h-screen flex flex-col items-center justify-center px-4 py-16">
   <div class="max-w-7xl w-full">
     <h1 class="text-white text-5xl md:text-6xl font-bold text-center mb-16">
       Characteristics
     </h1>
-    
-    <div class="grid md:grid-cols-2 gap-8 items-center">
-        <!-- Video placeholder -->
-        <div class="bg-zinc-800 rounded-lg w-full h-96 flex items-center justify-center">
-          <!-- Video Element -->
-          <video class="w-full h-full object-cover rounded-lg" controls>
-            <source src="/path/to/your/video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
 
-      <!-- Content -->
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <!-- Video local -->
+      <div class="relative w-full h-96 rounded-lg overflow-hidden shadow-lg">
+        <video class="w-full h-full object-cover rounded-lg" controls autoplay loop muted>
+          <source src={videoUrl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- Descripción -->
       <div class="space-y-8">
         <p class="text-white text-xl md:text-2xl leading-relaxed">
           SigNa es un intérprete inteligente que traduce señas en tiempo real,
           facilitando la comunicación entre personas Sordas y Oyentes. Su
           tecnología combina Machine Learning y Deep Learning.
         </p>
-  
       </div>
+    </div>
+
+    <!-- Herramientas usadas -->
+    <div class="mt-20">
+      <h2 class="text-white text-5xl md:text-6xl font-bold text-center">
+        Herramientas usadas
+      </h2>
     </div>
   </div>
 </section>
