@@ -1,0 +1,77 @@
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+<body>
+  <div class="flex min-h-screen">
+    <!-- Left Section - Login Form -->
+    <div>
+      <!-- Logo y Texto juntos -->
+      <div class="absolute flex items-center top-5 left-5">
+        <img src="/src/assets/hands.png" alt="Logo" class="opacity-75 object-cover w-20 h-20 rounded-full mr-2" />
+        <a  href="/" class="text-xl font-medium">Sol</a>
+      </div>
+    </div>
+
+    <div class="w-full lg:w-[40%] p-8 md:p-12 flex flex-col justify-center bg-[#ffffff]">
+      <div class="max-w-sm mx-auto w-full">
+        <!-- Login Form -->
+        <div class="space-y-6">
+          <div>
+            <h1 class="text-2xl font-semibold mb-1">Bienvenido perimera vez conociendo a sol </h1>
+            <p class="text-gray-500">Exelente,Ingresa la información</p>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <input type="text" placeholder="Name" class=" w-full p-3 border-b-2 border-black  ">
+            </div>
+            <div>
+              <input type="email" placeholder="Email" class="w-full p-3 border-black border-b-2 border-black-100" id="email" />
+            </div>
+            <div>
+              <input type="password" placeholder="Password" class="w-full border-black p-3 border-b-2" id="password" />
+            
+            </div>
+            <button onclick="handleLogin()" class="w-full bg-emerald-400 hover:bg-emerald-500 text-white py-2 rounded-md transition-colors">
+              <a href="/models">Ingresa</a>
+            </button>
+            <p class="text-center text-sm text-gray-500">
+              ¿No tienes una cuenta?
+              <a href="/signup" class="text-black hover:underline underline-offset-4">
+                Regístrate Gratis
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hidden lg:block lg:w-[60%] bg-[#ffffff] relative">
+      <!-- Contenedor principal -->
+      <div class="absolute inset-0 flex items-center justify-center">
+        <!-- Imagen dentro de un div que le da forma -->
+        <div class=" bg-black relative w-[80%] h-[79%] rounded-tl-[100px] rounded-br-[100px] overflow-hidden">
+          <img
+            src="/src/assets/Sinup.png"
+            alt="Imagen de fondo"
+            class=" absolute bottom-0 left-0 w-70 h-auto" />
+        </div>
+    
+        <!-- Texto alineado a la derecha e integrado en la imagen -->
+        <div class="absolute top-16 right-18 max-w-[65%] text-right">
+          <h1 class="text-white text-lg font-medium p-8">
+            “Explora Sol, donde la inteligencia artificial y el lenguaje de señas se unen para iluminar nuevas formas de comunicación.”
+          </h1>
+        </div>
+      </div>
+    </div>
+    
+    
+</body>
+</html>
