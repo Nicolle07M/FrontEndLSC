@@ -1,5 +1,7 @@
-
-
+---
+// Login.astro
+import { loginUser } from "../Utils/auth";
+---
 
 <!DOCTYPE html>
 <html lang="es">
@@ -10,58 +12,90 @@
 </head>
 <body>
   <div class="flex min-h-screen">
-    <!-- Left Section - Login Form -->
     <div>
-      <!-- Logo y Texto juntos -->
       <div class="absolute flex items-center top-5 left-5">
         <img src="/src/assets/hands.png" alt="Logo" class="opacity-75 object-cover w-20 h-20 rounded-full mr-2" />
-        <a  href="/" class="text-xl font-medium">Sol</a>
+        <a href="/" class="text-xl font-medium">Sol</a>
       </div>
     </div>
 
     <div class="w-full lg:w-[40%] p-8 md:p-12 flex flex-col justify-center bg-[#F0F0F0]">
       <div class="max-w-sm mx-auto w-full">
-        <!-- Login Form -->
         <div class="space-y-6">
           <div>
             <h1 class="text-2xl font-semibold mb-1">Bienvenido de nuevo a Sol</h1>
             <p class="text-gray-500">Ingresa la información</p>
           </div>
-          <div class="space-y-4">
+          <form id="loginForm" class="space-y-4">
             <div>
-              <input type="email" placeholder="Email" class="w-full bg-[#F0F0F0] p-3 border-b-2 border-black-100" id="email" />
+              <input 
+                type="email" 
+                placeholder="Email" 
+                class="w-full bg-[#F0F0F0] p-3 border-b-2 border-black-100" 
+                id="email" 
+                required 
+              />
             </div>
             <div>
-              <input type="password" placeholder="Password" class="w-full bg-[#F0F0F0] p-3 border-b-2" id="password" />
-              <a href="/forgot-password" class="text-sm text-gray-500 hover:text-gray-700 mt-2 inline-block border-b-2-black">
+              <input 
+                type="password" 
+                placeholder="Password" 
+                class="w-full bg-[#F0F0F0] p-3 border-b-2" 
+                id="password" 
+                required 
+              />
+              <a href="/forgot-password" class="text-sm text-gray-500 hover:text-gray-700 mt-2 inline-block">
                 Olvidaste tu Contraseña
               </a>
             </div>
-            <button onclick="handleLogin()" class="w-full bg-emerald-400 hover:bg-emerald-500 text-white py-2 rounded-md transition-colors">
-              <a href="/models">Ingresa</a>
+            <button 
+              type="submit"
+              class="w-full bg-emerald-400 hover:bg-emerald-500 text-white py-2 rounded-md transition-colors"
+            >
+              Ingresar
             </button>
             <p class="text-center text-sm text-gray-500">
               ¿No tienes una cuenta?
-              <a href="/signup" class="text-black hover:underline underline-offset-4">
+              <a href="/Sigup" class="text-black hover:underline underline-offset-4">
                 Regístrate Gratis
               </a>
             </p>
-          </div>
+          </form>
         </div>
       </div>
     </div>
 
-    <!-- Right Section - Image -->
     <div class="hidden lg:block lg:w-[60%] bg-[#F0F0F0] relative">
-      <!-- Placeholder Content -->
       <div class="absolute inset-0 flex items-center justify-center">
-        <!-- Imagen en el recuadro -->
-        <img
-          src="/src/assets/login.jpg"
-          alt="Imagen de fondo"
-          class="relative w-[60%] h-[100%] object-cover -rotate-90 rounded-tr-[100px] rounded-bl-[100px]" />
+        <img 
+          src="/src/assets/login.jpg" 
+          alt="Imagen de fondo" 
+          class="relative w-[60%] h-[100%] object-cover -rotate-90 rounded-tr-[100px] rounded-bl-[100px]" 
+        />
       </div>
     </div>
   </div>
+
+  <script>
+    import { loginUser } from "../Utils/auth";
+
+    const form = document.getElementById('loginForm');
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await loginUser({ email, password });
+            console.log('Login exitoso');
+            window.location.href = '/models';
+        } catch (error) {
+            console.error('Error en el login:', error);
+            alert('Error en el inicio de sesión: ' + (error.error || 'Error desconocido'));
+        }
+    });
+  </script>
 </body>
 </html>

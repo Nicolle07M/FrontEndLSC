@@ -1,69 +1,58 @@
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Registro</title>
+  <!-- Cargar Tailwind CSS desde un CDN sin problemas de CORS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-white">
   <div class="flex min-h-screen">
-    <!-- Left Section - Login Form -->
-    <div>
-      <!-- Logo y Texto juntos -->
-      <div class="absolute flex items-center top-5 left-5">
-        <img src="/src/assets/hands.png" alt="Logo" class="opacity-75 object-cover w-20 h-20 rounded-full mr-2" />
-        <a  href="/" class="text-xl font-medium">Sol</a>
-      </div>
+    <!-- Logo -->
+    <div class="absolute flex items-center top-5 left-5">
+      <img src="/src/assets/hands.png" alt="Logo" class="opacity-75 object-cover w-20 h-20 rounded-full mr-2" />
+      <a href="/" class="text-xl font-medium">Sol</a>
     </div>
 
-    <div class="w-full lg:w-[40%] p-8 md:p-12 flex flex-col justify-center bg-[#ffffff]">
+    <!-- Formulario de Registro -->
+    <div class="w-full lg:w-[40%] p-8 md:p-12 flex flex-col justify-center bg-white">
       <div class="max-w-sm mx-auto w-full">
-        <!-- Login Form -->
         <div class="space-y-6">
           <div>
-            <h1 class="text-2xl font-semibold mb-1">Bienvenido perimera vez conociendo a sol </h1>
-            <p class="text-gray-500">Exelente,Ingresa la información</p>
+            <h1 class="text-2xl font-semibold mb-1">Bienvenido a Sol</h1>
+            <p class="text-gray-500">Ingresa la información para registrarte</p>
           </div>
-          <div class="space-y-4">
+          
+          <!-- Formulario -->
+          <form id="registerForm" class="space-y-4">
             <div>
-              <input type="text" placeholder="Name" class=" w-full p-3 border-b-2 border-black  ">
+              <input type="text" placeholder="Nombre de usuario" class="w-full p-3 border-b-2 border-gray-100 focus:outline-none focus:border-emerald-400" id="username" required />
             </div>
             <div>
-              <input type="email" placeholder="Email" class="w-full p-3 border-black border-b-2 border-black-100" id="email" />
+              <input type="email" placeholder="Email" class="w-full p-3 border-b-2 border-gray-100 focus:outline-none focus:border-emerald-400" id="email" required />
             </div>
             <div>
-              <input type="password" placeholder="Password" class="w-full border-black p-3 border-b-2" id="password" />
-            
+              <input type="password" placeholder="Contraseña" class="w-full p-3 border-b-2 border-gray-100 focus:outline-none focus:border-emerald-400" id="password" required />
             </div>
-            <button onclick="handleLogin()" class="w-full bg-emerald-400 hover:bg-emerald-500 text-white py-2 rounded-md transition-colors">
-              <a href="/models">Ingresa</a>
+            <button type="submit" class="w-full bg-emerald-400 hover:bg-emerald-500 text-white py-2 rounded-md transition-colors">
+              Registrarse
             </button>
             <p class="text-center text-sm text-gray-500">
-              ¿No tienes una cuenta?
-              <a href="/signup" class="text-black hover:underline underline-offset-4">
-                Regístrate Gratis
-              </a>
+              ¿Ya tienes una cuenta?
+              <a href="/login" class="text-black hover:underline underline-offset-4">Iniciar sesión</a>
             </p>
-          </div>
+          </form>
         </div>
       </div>
     </div>
 
-    <div class="hidden lg:block lg:w-[60%] bg-[#ffffff] relative">
-      <!-- Contenedor principal -->
+    <!-- Imagen -->
+    <div class="hidden lg:block lg:w-[60%] bg-white relative">
       <div class="absolute inset-0 flex items-center justify-center">
-        <!-- Imagen dentro de un div que le da forma -->
-        <div class=" bg-black relative w-[80%] h-[79%] rounded-tl-[100px] rounded-br-[100px] overflow-hidden">
-          <img
-            src="/src/assets/Sinup.png"
-            alt="Imagen de fondo"
-            class=" absolute bottom-0 left-0 w-70 h-auto" />
+        <div class="bg-black relative w-[80%] h-[79%] rounded-tl-[100px] rounded-br-[100px] overflow-hidden">
+          <img src="/src/assets/Sinup.png" alt="Imagen de fondo" class="absolute bottom-0 left-0 w-70 h-auto" />
         </div>
-    
-        <!-- Texto alineado a la derecha e integrado en la imagen -->
         <div class="absolute top-16 right-18 max-w-[65%] text-right">
           <h1 class="text-white text-lg font-medium p-8">
             “Explora Sol, donde la inteligencia artificial y el lenguaje de señas se unen para iluminar nuevas formas de comunicación.”
@@ -71,7 +60,73 @@
         </div>
       </div>
     </div>
-    
-    
+  </div>
+
+  <!-- Modal de éxito -->
+  <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-8 rounded-lg text-center">
+      <!-- Ícono de mano con pulgar arriba -->
+      <img src="https://cdn-icons-png.flaticon.com/512/25/25425.png" alt="Pulgar arriba" class="w-16 h-16 mx-auto mb-4" />
+      <p class="text-lg font-semibold mb-4">¡Registro exitoso!</p>
+      <button id="closeModalButton" class="bg-emerald-400 text-white px-4 py-2 rounded-md hover:bg-emerald-500 transition-colors">
+        Cerrar
+      </button>
+    </div>
+  </div>
+
+  <script>
+    import { registerUser } from "../Utils/auth";
+
+    // Función para mostrar el modal
+    function showModal() {
+      const modal = document.getElementById("successModal");
+      modal.classList.remove("hidden");
+    }
+
+    // Función para cerrar el modal
+    function closeModal() {
+      const modal = document.getElementById("successModal");
+      modal.classList.add("hidden"); // Oculta el modal
+      window.location.href = "/models"; // Redirige después de cerrar el modal
+    }
+
+    // Asignar la función closeModal al botón "Cerrar"
+    document.getElementById("closeModalButton").addEventListener("click", closeModal);
+
+    window.onload = function () {
+      const form = document.getElementById("registerForm");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Asegurarse de que los elementos existen antes de acceder a sus valores
+        const usernameInput = document.getElementById("username");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+
+        if (!usernameInput || !emailInput || !passwordInput) {
+          console.error("Uno de los campos del formulario no se encontró.");
+          return;
+        }
+
+        const username = usernameInput.value.trim();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (!username || !email || !password) {
+          alert("Todos los campos son obligatorios.");
+          return;
+        }
+
+        try {
+          await registerUser({ username, email, password });
+          showModal(); // Muestra el modal de éxito
+          form.reset(); // Limpia el formulario después del registro
+        } catch (error) {
+          alert("Error en el registro: " + (error.error || "Error desconocido"));
+        }
+      });
+    };
+  </script>
 </body>
 </html>
